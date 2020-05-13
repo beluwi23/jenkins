@@ -65,14 +65,14 @@ pipeline {
 			steps {
 				//"docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG"
 				script {
-					dockerImage = docker.build("in28min/currency-exchange-devops:${env.BUILD_TAG}")
+					dockerImage = docker.build("beluwi23/currency-exchange-devops:${env.BUILD_TAG}")
 				}
 			}
 		}
 		stage('Push Docker Image') {
 			steps {
 				script {
-					docker.wirhRegistry('', 'dockerhub')
+					docker.withRegistry('', 'dockerhub')
 					dockerImage.Push();
 					dockerImage.Push('latest');
 				}				
