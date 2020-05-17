@@ -48,10 +48,10 @@ pipeline {
 		}	
 		stage('Test') {
 			steps {
-				sh "mvn Test"
+				sh "mvn test"
 			}
 		}	
-		stage('IntegrationTest') {
+		stage('Integration Test') {
 			steps {
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
@@ -73,8 +73,9 @@ pipeline {
 			steps {
 				script {
 					docker.withRegistry('', 'dockerhub')
-					dockerImage.Push();
-					dockerImage.Push('latest');
+						dockerImage.Push();
+						dockerImage.Push('latest');
+					}	
 				}				
 			}
 		}
